@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CheEspanol — Learn Spanish, your way</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --olive-900:#41431B; --olive-800:#2B2D12; --olive-500:#AEB784; --olive-300:#E3DBBB; --cream-100:#F8F3E1; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:linear-gradient(160deg,#F8F3E1,#F3EBD4);color:var(--olive-900);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+    /* ── Nav ── */
+    .nav{position:sticky;top:0;z-index:100;background:rgba(248,243,225,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(65,67,27,0.08)}
+    .nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--olive-900)}
+    .nav-brand svg{height:36px;width:36px}
+    .nav-brand span{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:20px}
+    .nav-links{display:flex;align-items:center;gap:28px}
+    .nav-link{font-size:14px;font-weight:600;color:var(--olive-900);text-decoration:none;opacity:0.7;transition:opacity .2s}
+    .nav-link:hover{opacity:1}
+    .nav-cta{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 18px;border-radius:12px;background:var(--olive-900);color:var(--cream-100);font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:800;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s}
+    .nav-cta:hover{opacity:.88}
+    .nav-text-links{display:flex;align-items:center;gap:28px}
+    @media(max-width:640px){.nav-text-links{display:none}}
+
+    /* ── Utility ── */
+    .section{max-width:1080px;margin:0 auto;padding:0 24px}
+    .section-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--olive-500);margin-bottom:8px}
+    .section-heading{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:var(--olive-900);line-height:1.25}
+    .glass-card{background:rgba(255,255,255,0.82);border:1px solid rgba(65,67,27,0.10);box-shadow:0 2px 24px rgba(65,67,27,0.08);border-radius:16px}
+
+    /* ── Hero ── */
+    .hero{min-height:100vh;display:flex;align-items:center;padding-top:64px;padding-bottom:64px}
+    .hero-inner{display:flex;align-items:center;gap:64px;width:100%}
+    .hero-text{flex:1;min-width:0}
+    .hero-phones{flex:0 0 auto;position:relative;width:380px;height:440px}
+    .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:48px;font-weight:700;line-height:1.12;color:var(--olive-900);margin-bottom:16px}
+    .hero-sub{font-size:18px;line-height:1.6;color:rgba(65,67,27,0.68);max-width:460px;margin-bottom:32px}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .store-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 24px;border-radius:16px;font-family:'DM Sans',system-ui,sans-serif;font-size:14px;font-weight:800;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s}
+    .store-btn:hover{opacity:.88}
+    .store-btn svg{width:20px;height:20px}
+    .store-primary{background:var(--olive-900);color:var(--cream-100)}
+    .store-ghost{background:transparent;color:var(--olive-900);border:1.5px solid rgba(65,67,27,0.15)}
+    .hero-note{margin-top:14px;font-size:13px;color:var(--olive-500)}
+    @media(max-width:900px){
+      .hero-inner{flex-direction:column;text-align:center}
+      .hero h1{font-size:36px}
+      .hero-sub{margin-left:auto;margin-right:auto}
+      .hero-buttons{justify-content:center}
+      .hero-phones{display:none}
+      .hero-note{text-align:center}
+    }
+
+    /* ── Phone frames ── */
+    .phone-frame{width:200px;height:410px;background:#141414;border-radius:36px;padding:8px;position:absolute;box-shadow:0 24px 48px rgba(0,0,0,0.2)}
+    .phone-frame::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:34%;height:20px;background:#111;border-radius:0 0 12px 12px;z-index:5}
+    .phone-screen{width:100%;height:100%;border-radius:30px;overflow:hidden;display:flex;flex-direction:column}
+    .phone-1{transform:rotate(-4deg);left:0;top:10px;z-index:2}
+    .phone-2{transform:rotate(4deg);left:160px;top:0;z-index:1}
+
+    /* Phone 1: Dark Flashcard */
+    .p1-screen{background:linear-gradient(180deg,#161707,#1E2010);color:var(--cream-100);font-family:'DM Sans',system-ui,sans-serif}
+    .p1-topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 12px 6px;font-size:11px;font-weight:600}
+    .p1-close{color:rgba(248,243,225,0.6);font-size:16px;width:24px;text-align:left}
+    .p1-counter{color:rgba(248,243,225,0.6);font-size:11px}
+    .p1-progress{height:4px;margin:4px 12px 0;background:rgba(248,243,225,0.08);border-radius:2px}
+    .p1-progress-fill{height:100%;width:25%;background:var(--olive-500);border-radius:2px}
+    .p1-card-area{flex:1;display:flex;align-items:center;justify-content:center;padding:16px}
+    .p1-flashcard{background:var(--cream-100);border-radius:16px;padding:24px 16px;text-align:center;width:100%}
+    .p1-emoji{font-size:40px;margin-bottom:8px;line-height:1}
+    .p1-word{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:var(--olive-900)}
+    .p1-pronunciation{font-size:12px;color:rgba(65,67,27,0.50);margin-top:4px}
+    .p1-pill{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:20px;background:var(--olive-300);color:var(--olive-900);font-size:10px;font-weight:700}
+    .p1-ratings{display:flex;gap:4px;padding:8px 10px 14px}
+    .p1-rating{flex:1;border-radius:8px;padding:6px 2px;text-align:center;border:none;font-family:'DM Sans',system-ui,sans-serif}
+    .p1-rating-label{display:block;font-size:9px;font-weight:700}
+    .p1-rating-time{display:block;font-size:7px;opacity:.55}
+    .p1-again{background:rgba(249,115,22,0.12);color:#F97316}
+    .p1-hard{background:rgba(248,243,225,0.06);color:rgba(248,243,225,0.50)}
+    .p1-good{background:rgba(174,183,132,0.18);color:var(--olive-500)}
+    .p1-easy{background:rgba(248,243,225,0.06);color:rgba(248,243,225,0.50)}
+
+    /* Phone 2: Light Dashboard */
+    .p2-screen{background:var(--cream-100);color:var(--olive-800);font-family:'DM Sans',system-ui,sans-serif}
+    .p2-topbar{display:flex;align-items:center;justify-content:space-between;padding:26px 10px 4px}
+    .p2-topbar-left{display:flex;align-items:center;gap:4px}
+    .p2-streak{display:flex;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--olive-900)}
+    .p2-streak svg{width:16px;height:16px}
+    .p2-level{width:28px;height:28px}
+    .p2-level svg{width:28px;height:28px}
+    .p2-bell{width:18px;height:18px;color:var(--olive-900)}
+    .p2-content{flex:1;overflow:hidden;padding:6px 10px 0;display:flex;flex-direction:column;gap:6px}
+    .p2-next{background:var(--olive-900);color:var(--cream-100);border-radius:12px;padding:10px}
+    .p2-next-label{font-size:8px;font-weight:700;opacity:.6;text-transform:uppercase;letter-spacing:.5px}
+    .p2-next-title{font-size:12px;font-weight:800;margin-top:2px}
+    .p2-next-sub{font-size:8px;opacity:.5;margin-top:1px}
+    .p2-next-btn{display:inline-block;margin-top:6px;padding:4px 10px;border-radius:8px;background:var(--olive-500);color:var(--olive-900);font-size:9px;font-weight:800;border:none}
+    .p2-upcoming{background:rgba(255,255,255,0.78);border:1px solid rgba(65,67,27,0.08);border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:8px}
+    .p2-upcoming-icon{width:16px;height:16px;color:var(--olive-500);flex-shrink:0}
+    .p2-upcoming-body{flex:1;min-width:0}
+    .p2-upcoming-topic{font-size:10px;font-weight:700;color:var(--olive-900)}
+    .p2-upcoming-time{font-size:8px;color:rgba(65,67,27,0.50)}
+    .p2-upcoming-badge{padding:2px 6px;border-radius:6px;background:rgba(174,183,132,0.25);color:var(--olive-900);font-size:7px;font-weight:700;white-space:nowrap}
+    .p2-goals{background:rgba(255,255,255,0.78);border:1px solid rgba(65,67,27,0.08);border-radius:12px;padding:8px 10px}
+    .p2-goals-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .p2-goals-title{font-size:10px;font-weight:800;color:var(--olive-900)}
+    .p2-goals-day{font-size:8px;color:rgba(65,67,27,0.50)}
+    .p2-rings{display:flex;justify-content:space-around}
+    .p2-ring-wrap{text-align:center}
+    .p2-ring-wrap svg{width:40px;height:40px}
+    .p2-ring-label{font-size:7px;font-weight:600;color:rgba(65,67,27,0.50);margin-top:1px;display:block}
+    .p2-pack{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:rgba(255,255,255,0.78);border:1px solid rgba(65,67,27,0.08);border-radius:12px}
+    .p2-pack-left{display:flex;align-items:center;gap:6px}
+    .p2-pack-dots{display:flex;gap:3px}
+    .p2-pack-dot{width:6px;height:6px;border-radius:50%}
+    .p2-pack-dot-on{background:var(--olive-500)}
+    .p2-pack-dot-off{background:rgba(65,67,27,0.12)}
+    .p2-pack-count{font-size:8px;font-weight:700;color:var(--olive-900)}
+    .p2-pack-link{font-size:8px;font-weight:700;color:var(--olive-500)}
+    .p2-navbar{display:flex;align-items:center;justify-content:space-around;padding:4px 8px 12px;margin-top:auto}
+    .p2-nav-item{text-align:center}
+    .p2-nav-item svg{width:18px;height:18px}
+    .p2-nav-label{display:block;font-size:7px;font-weight:600;margin-top:1px}
+    .p2-nav-inactive svg{color:rgba(65,67,27,0.35)}
+    .p2-nav-inactive .p2-nav-label{color:rgba(65,67,27,0.35)}
+    .p2-nav-active svg{color:var(--olive-900)}
+    .p2-nav-active .p2-nav-label{color:var(--olive-900);font-weight:800}
+
+    /* ── How It Works ── */
+    .how{padding-top:96px;padding-bottom:96px}
+    .how-inner{display:flex;gap:56px;align-items:flex-start}
+    .how-left{flex:0 0 280px}
+    .how-right{flex:1;display:flex;flex-direction:column;gap:16px}
+    .step-card{display:flex;gap:16px;padding:20px}
+    .step-icon-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+    .step-icon{width:40px;height:40px;color:var(--olive-500)}
+    .step-number{width:24px;height:24px;border-radius:50%;background:var(--olive-900);color:var(--cream-100);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+    .step-title{font-size:16px;font-weight:700;color:var(--olive-900);margin-bottom:4px}
+    .step-desc{font-size:14px;line-height:1.55;color:rgba(65,67,27,0.60)}
+    .how-cta{text-align:center;margin-top:48px}
+    .how-cta-text{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:var(--olive-900);margin-bottom:16px}
+    .how-cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .store-btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;padding:0 18px;border-radius:12px;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:800;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s}
+    .store-btn-sm:hover{opacity:.88}
+    .store-btn-sm.store-ghost{border:1.5px solid rgba(65,67,27,0.15)}
+    .store-btn-sm svg{width:16px;height:16px}
+    @media(max-width:768px){
+      .how-inner{flex-direction:column;gap:32px}
+      .how-left{flex:none;text-align:center}
+    }
+
+    /* ── Why ── */
+
+    /* ── Live Lessons ── */
+    .live{padding-bottom:96px}
+    .live-header{text-align:center;margin-bottom:40px}
+    .live-window{max-width:640px;margin:0 auto;overflow:hidden}
+    .lw-titlebar{background:var(--olive-900);height:40px;display:flex;align-items:center;padding:0 14px;position:relative}
+    .lw-dots{display:flex;gap:6px}
+    .lw-dot{width:10px;height:10px;border-radius:50%}
+    .lw-dot-r{background:#EF4444} .lw-dot-y{background:#FBBF24} .lw-dot-g{background:#4ADE80}
+    .lw-title{position:absolute;left:50%;transform:translateX(-50%);color:var(--cream-100);font-size:13px;font-weight:600;white-space:nowrap}
+    .lw-video{background:var(--olive-300);aspect-ratio:16/9;position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:0;min-height:280px;overflow:hidden}
+    .lw-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .lw-video-overlay{position:absolute;top:0;left:0;right:0;z-index:1;padding:12px 20px;background:linear-gradient(180deg,rgba(43,45,18,0.6) 0%,rgba(43,45,18,0.0) 100%);display:flex;flex-wrap:wrap;gap:6px}
+    .lw-lesson-title{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:var(--cream-100)}
+    .lw-lesson-sub{font-size:13px;color:rgba(248,243,225,0.75)}
+    .lw-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+    .lw-pill{padding:5px 12px;border-radius:20px;background:rgba(174,183,132,0.85);color:var(--olive-900);font-size:12px;font-weight:700;backdrop-filter:blur(4px)}
+    .lw-teacher,.lw-student{position:absolute;bottom:12px;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+    .lw-teacher{left:12px;width:130px;height:95px}
+    .lw-student{right:12px;width:115px;height:85px}
+    .lw-teacher img,.lw-student img{width:100%;height:100%;object-fit:cover;display:block}
+    .lw-avatar-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:9px;font-weight:700;padding:2px 0;background:rgba(0,0,0,0.45);color:var(--cream-100)}
+    .lw-green-dot{width:8px;height:8px;border-radius:50%;background:var(--olive-500);position:absolute;top:6px;right:6px;box-shadow:0 0 0 2px rgba(174,183,132,0.3);z-index:2}
+    .lw-toolbar{background:var(--olive-800);height:36px;display:flex;align-items:center;justify-content:center;gap:12px}
+    .lw-tool{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--olive-500);display:flex;align-items:center;justify-content:center;background:transparent}
+    .lw-tool svg{width:12px;height:12px;color:var(--olive-300)}
+    .lw-tool-end{border-color:#EF4444}
+    .lw-tool-end svg{color:#EF4444}
+    .live-note{text-align:center;max-width:480px;margin:24px auto 0;font-size:14px;line-height:1.55;color:rgba(65,67,27,0.60)}
+
+    /* ── Footer ── */
+    .footer{background:var(--olive-900);color:var(--cream-100)}
+    .footer-main{max-width:1080px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:40px}
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-brand svg{height:28px;width:28px;flex-shrink:0}
+    .footer-brand span{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:18px;white-space:nowrap}
+    .footer-nav{display:flex;align-items:center;justify-content:center;gap:32px}
+    .footer-link{font-size:14px;font-weight:500;color:rgba(248,243,225,0.65);text-decoration:none;transition:color .25s ease}
+    .footer-link:hover{color:var(--cream-100)}
+    .footer-social{display:flex;align-items:center;justify-content:flex-end;gap:14px}
+    .footer-social-icon{display:flex;align-items:center;justify-content:center;color:var(--cream-100);opacity:0.65;transition:opacity .25s ease}
+    .footer-social-icon:hover{opacity:1}
+    .footer-social-icon svg{width:24px;height:24px}
+    .footer-social-handle{font-size:13px;color:var(--olive-500);font-weight:600;white-space:nowrap}
+    .footer-bottom{border-top:1px solid var(--olive-300);border-top-color:rgba(227,219,187,0.15)}
+    .footer-bottom-inner{max-width:1080px;margin:0 auto;padding:20px 24px;text-align:center}
+    .footer-copy{font-size:13px;color:rgba(248,243,225,0.4);font-weight:400}
+    @media(max-width:768px){
+      .footer-main{grid-template-columns:1fr;gap:28px;padding:40px 24px;text-align:center}
+      .footer-brand{justify-content:center}
+      .footer-nav{justify-content:center;gap:24px;flex-wrap:wrap}
+      .footer-social{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="100" r="90" fill="#1E1E18"/><path d="M90 182 Q78 208 56 216 Q82 202 98 186 Z" fill="#1E1E18"/><text x="110" y="100" font-family="'Playfair Display',Georgia,serif" font-size="74" font-weight="700" fill="#F8F3E1" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">Che</text><circle cx="178" cy="168" r="20" fill="#AEB784"/><text x="170" y="174" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="14" font-weight="700" fill="#1E1E18" text-anchor="middle">&#12354;</text><text x="187" y="176" font-family="'Playfair Display',Georgia,serif" font-size="16" font-weight="700" fill="#F8F3E1" text-anchor="middle">A</text></svg>
+      <span>CheEspanol</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-text-links">
+        <a href="#how" class="nav-link">How it works</a>
+        <a href="faq.html" class="nav-link">Help</a>
+      </div>
+      <a href="#download" class="nav-cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="section hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Learn Spanish,<br>your way.</h1>
+      <p class="hero-sub">Personalized 1-on-1 lessons with a dedicated teacher — built around your profession, your interests, and your goals.</p>
+      <div class="hero-buttons" id="download">
+        <a href="#" class="store-btn store-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="#" class="store-btn store-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.384.22-.72.61-.92zM14.5 12.707l2.55 2.55-8.56 4.87 6.01-7.42zM17.82 8.328l2.63 1.5c.57.324.57 1.02 0 1.344l-2.63 1.5L15.207 12l2.613-3.672zM8.49 3.873l8.56 4.87-2.55 2.55-6.01-7.42z"/></svg>
+          Google Play
+        </a>
+      </div>
+      <p class="hero-note">Free trial lesson &middot; No credit card required</p>
+    </div>
+
+    <!-- Phone mockups (desktop only) -->
+    <div class="hero-phones">
+      <!-- Phone 1: Dark Flashcard Review -->
+      <div class="phone-frame phone-1">
+        <div class="phone-screen p1-screen">
+          <div class="p1-topbar">
+            <span class="p1-close">&times;</span>
+            <span class="p1-counter">3 of 12</span>
+            <span style="width:24px"></span>
+          </div>
+          <div class="p1-progress"><div class="p1-progress-fill"></div></div>
+          <div class="p1-card-area">
+            <div class="p1-flashcard">
+              <div class="p1-emoji">&#x1F431;</div>
+              <div class="p1-word">gato</div>
+              <div class="p1-pronunciation">/&#x2C8;&#x261;a.to/</div>
+              <span class="p1-pill">Animals</span>
+            </div>
+          </div>
+          <div class="p1-ratings">
+            <div class="p1-rating p1-again"><span class="p1-rating-label">Again</span><span class="p1-rating-time">&lt; 1 min</span></div>
+            <div class="p1-rating p1-hard"><span class="p1-rating-label">Hard</span><span class="p1-rating-time">8 min</span></div>
+            <div class="p1-rating p1-good"><span class="p1-rating-label">Good</span><span class="p1-rating-time">1 day</span></div>
+            <div class="p1-rating p1-easy"><span class="p1-rating-label">Easy</span><span class="p1-rating-time">3 days</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Phone 2: Light Dashboard -->
+      <div class="phone-frame phone-2">
+        <div class="phone-screen p2-screen">
+          <div class="p2-topbar">
+            <div class="p2-topbar-left">
+              <div class="p2-streak">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.5 6 4 9.5 4 14a8 8 0 0 0 16 0c0-4.5-4.5-8-8-12z" fill="#D97706" opacity="0.9"/><path d="M12 9c-1.5 2-3 3.5-3 5.5a3 3 0 0 0 6 0c0-2-1.5-3.5-3-5.5z" fill="#FBBF24"/></svg>
+                12
+              </div>
+              <div class="p2-level">
+                <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(65,67,27,0.12)" stroke-width="2.5"/><circle cx="18" cy="18" r="15" fill="none" stroke="#AEB784" stroke-width="2.5" stroke-dasharray="94.25" stroke-dashoffset="56.55" stroke-linecap="round" transform="rotate(-90 18 18)"/><text x="18" y="19" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-weight="800" fill="#41431B">A1</text></svg>
+              </div>
+            </div>
+            <svg class="p2-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="p2-content">
+            <!-- Next Action -->
+            <div class="p2-next">
+              <div class="p2-next-label">Up next</div>
+              <div class="p2-next-title">Complete Homework</div>
+              <div class="p2-next-sub">Unit 3 — Food &amp; Restaurants &middot; ~10 min</div>
+              <div class="p2-next-btn">Open Homework</div>
+            </div>
+            <!-- Upcoming Lesson -->
+            <div class="p2-upcoming">
+              <svg class="p2-upcoming-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <div class="p2-upcoming-body">
+                <div class="p2-upcoming-topic">Unit 4 — Directions</div>
+                <div class="p2-upcoming-time">Thursday, Mar 27 &middot; 3:00 PM</div>
+              </div>
+              <div class="p2-upcoming-badge">in 3 days</div>
+            </div>
+            <!-- Weekly Goals -->
+            <div class="p2-goals">
+              <div class="p2-goals-head">
+                <span class="p2-goals-title">This Week</span>
+                <span class="p2-goals-day">Saturday</span>
+              </div>
+              <div class="p2-rings">
+                <div class="p2-ring-wrap">
+                  <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="rgba(65,67,27,0.10)" stroke-width="4"/><circle cx="32" cy="32" r="24" fill="none" stroke="#AEB784" stroke-width="4" stroke-dasharray="150.8" stroke-dashoffset="107.7" stroke-linecap="round" transform="rotate(-90 32 32)"/><text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="16" font-weight="800" fill="#41431B">2</text></svg>
+                  <span class="p2-ring-label">Active</span>
+                </div>
+                <div class="p2-ring-wrap">
+                  <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="rgba(65,67,27,0.10)" stroke-width="4"/><circle cx="32" cy="32" r="24" fill="none" stroke="#AEB784" stroke-width="4" stroke-dasharray="150.8" stroke-dashoffset="21.5" stroke-linecap="round" transform="rotate(-90 32 32)"/><text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="16" font-weight="800" fill="#41431B">6</text></svg>
+                  <span class="p2-ring-label">Passive</span>
+                </div>
+                <div class="p2-ring-wrap">
+                  <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="rgba(65,67,27,0.10)" stroke-width="4"/><circle cx="32" cy="32" r="24" fill="none" stroke="#AEB784" stroke-width="4" stroke-dasharray="150.8" stroke-dashoffset="150.8" stroke-linecap="round" transform="rotate(-90 32 32)"/><text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="16" font-weight="800" fill="rgba(65,67,27,0.35)">0</text></svg>
+                  <span class="p2-ring-label">HW</span>
+                </div>
+              </div>
+            </div>
+            <!-- Pack Banner -->
+            <div class="p2-pack">
+              <div class="p2-pack-left">
+                <div class="p2-pack-dots">
+                  <span class="p2-pack-dot p2-pack-dot-on"></span><span class="p2-pack-dot p2-pack-dot-on"></span><span class="p2-pack-dot p2-pack-dot-on"></span>
+                  <span class="p2-pack-dot p2-pack-dot-off"></span><span class="p2-pack-dot p2-pack-dot-off"></span><span class="p2-pack-dot p2-pack-dot-off"></span><span class="p2-pack-dot p2-pack-dot-off"></span><span class="p2-pack-dot p2-pack-dot-off"></span>
+                </div>
+                <span class="p2-pack-count"><strong>3</strong> lessons left</span>
+              </div>
+              <span class="p2-pack-link">View Packs</span>
+            </div>
+          </div>
+          <!-- Bottom Nav -->
+          <div class="p2-navbar">
+            <div class="p2-nav-item p2-nav-inactive">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="14" rx="2"/><path d="M8 2h10a2 2 0 0 1 2 2v10"/></svg>
+              <span class="p2-nav-label">625 Words</span>
+            </div>
+            <div class="p2-nav-item p2-nav-active">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              <span class="p2-nav-label">Home</span>
+            </div>
+            <div class="p2-nav-item p2-nav-inactive">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+              <span class="p2-nav-label">My Lessons</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section class="section how" id="how">
+  <div class="how-inner">
+    <div class="how-left">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="section-heading">Content built around you</h2>
+    </div>
+    <div class="how-right">
+      <div class="glass-card step-card">
+        <div class="step-icon-wrap">
+          <svg class="step-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="4" width="20" height="32" rx="4"/><line x1="17" y1="30" x2="23" y2="30"/><path d="M20 14v6m0 0l-3-3m3 3l3-3"/></svg>
+          <span class="step-number">1</span>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Download &amp; sign up</div>
+          <p class="step-desc">Get the app, create your account with email or Google, and tell us about your goals and interests.</p>
+        </div>
+      </div>
+      <div class="glass-card step-card">
+        <div class="step-icon-wrap">
+          <svg class="step-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="16" r="5"/><circle cx="26" cy="16" r="5"/><path d="M6 32c0-4.42 3.58-8 8-8h0c1.5 0 2.9.41 4.1 1.13"/><path d="M22 25.13c1.2-.72 2.6-1.13 4.1-1.13h0c4.42 0 8 3.58 8 8"/></svg>
+          <span class="step-number">2</span>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Book a free lesson</div>
+          <p class="step-desc">Your first lesson is free. Pick a time that works, meet your teacher, and get a personalized learning roadmap.</p>
+        </div>
+      </div>
+      <div class="glass-card step-card">
+        <div class="step-icon-wrap">
+          <svg class="step-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 32l6-12 6 8 6-16 6 10"/><circle cx="32" cy="10" r="3" fill="none"/><path d="M31 7l-1-2m4 1l1-2m-5 5l-2-1m7 0l2-1"/></svg>
+          <span class="step-number">3</span>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Learn at your pace</div>
+          <p class="step-desc">Live lessons, recorded sessions, personalized homework, and vocabulary flashcards — all adapting to your progress.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="how-cta">
+    <p class="how-cta-text">Ready to start?</p>
+    <div class="how-cta-buttons">
+      <a href="#" class="store-btn-sm store-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a href="#" class="store-btn-sm store-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734c0-.384.22-.72.61-.92zM14.5 12.707l2.55 2.55-8.56 4.87 6.01-7.42zM17.82 8.328l2.63 1.5c.57.324.57 1.02 0 1.344l-2.63 1.5L15.207 12l2.613-3.672zM8.49 3.873l8.56 4.87-2.55 2.55-6.01-7.42z"/></svg>
+        Google Play
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHY CHEESPANOL ══════════════ -->
+<!-- ══════════════ LIVE LESSONS ══════════════ -->
+<section class="section live">
+  <div class="live-header">
+    <div class="section-label">LIVE LESSONS</div>
+    <h2 class="section-heading">Face to face, from anywhere</h2>
+  </div>
+  <div class="glass-card live-window">
+    <div class="lw-video">
+      <img class="lw-video-bg" src="assets/vocab-food.png" alt="Vocabulary: Food">
+      <div class="lw-video-overlay">
+        <div class="lw-pills">
+          <span class="lw-pill">&#x1F35E; pan</span>
+          <span class="lw-pill">&#x1F95B; leche</span>
+          <span class="lw-pill">&#x1F34E; manzana</span>
+          <span class="lw-pill">&#x1F4A7; agua</span>
+        </div>
+      </div>
+      <div class="lw-teacher">
+        <div class="lw-green-dot"></div>
+        <img src="assets/teacher.png" alt="Teacher">
+        <span class="lw-avatar-label">Profe</span>
+      </div>
+      <div class="lw-student">
+        <img src="assets/student.png" alt="Student">
+        <span class="lw-avatar-label">You</span>
+      </div>
+    </div>
+    <div class="lw-toolbar">
+      <div class="lw-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+      <div class="lw-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></div>
+      <div class="lw-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="lw-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="lw-tool lw-tool-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 12.88a16.06 16.06 0 0 0-21.08 0"/><path d="M1 12.88l2.41 2.41a1 1 0 0 0 1.18.18l3.41-1.7V10a12 12 0 0 1 8 0v3.77l3.41 1.7a1 1 0 0 0 1.18-.18L23 12.88"/></svg></div>
+    </div>
+  </div>
+  <p class="live-note">45-minute live lessons with your dedicated teacher. Every session recorded for you to review.</p>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="footer-main">
+    <!-- Left: Brand -->
+    <div class="footer-brand">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="100" r="90" fill="#F8F3E1"/><path d="M90 182 Q78 208 56 216 Q82 202 98 186 Z" fill="#F8F3E1"/><text x="110" y="100" font-family="'Playfair Display',Georgia,serif" font-size="74" font-weight="700" fill="#41431B" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">Che</text><circle cx="178" cy="168" r="20" fill="#AEB784"/><text x="170" y="174" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="14" font-weight="700" fill="#41431B" text-anchor="middle">&#12354;</text><text x="187" y="176" font-family="'Playfair Display',Georgia,serif" font-size="16" font-weight="700" fill="#F8F3E1" text-anchor="middle">A</text></svg>
+      <span>CheEspanol</span>
+    </div>
+    <!-- Center: Nav links -->
+    <nav class="footer-nav">
+      <a href="#" class="footer-link">Terms of Service</a>
+      <a href="#" class="footer-link">Privacy Policy</a>
+      <a href="faq.html" class="footer-link">Help</a>
+    </nav>
+    <!-- Right: Social -->
+    <div class="footer-social">
+      <a href="https://instagram.com/cheespanol" class="footer-social-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://facebook.com/cheespanol" class="footer-social-icon" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <span class="footer-social-handle">@cheespanol</span>
+    </div>
+  </div>
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span class="footer-copy">&copy; 2026 CheEspanol</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

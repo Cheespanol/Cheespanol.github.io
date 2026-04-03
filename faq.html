@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CheEspanol — Frequently Asked Questions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --olive-900: #41431B;
+      --olive-800: #2B2D12;
+      --olive-500: #AEB784;
+      --olive-300: #E3DBBB;
+      --cream-100: #F8F3E1;
+      --text-primary: #2B2D12;
+      --text-secondary: rgba(65,67,27, 0.68);
+      --text-muted: rgba(65,67,27, 0.50);
+      --divider: rgba(65,67,27, 0.12);
+      --card-bg: rgba(255,255,255, 0.82);
+      --card-border: rgba(65,67,27, 0.10);
+      --card-shadow: 0 2px 24px rgba(65,67,27, 0.08);
+      --input-bg: rgba(255,255,255, 0.92);
+      --input-border: rgba(65,67,27, 0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(160deg, #F8F3E1, #F3EBD4);
+      min-height: 100vh;
+    }
+
+    /* ═══════════ NAV ═══════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(248, 243, 225, 0.82);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+    }
+    .nav-left {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--olive-900);
+    }
+    .nav-left svg { width: 40px; height: 40px; flex-shrink: 0; }
+    .nav-left span {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px; font-weight: 400;
+    }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-right a.nav-link {
+      font-size: 14px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-right a.nav-link:hover { color: var(--olive-900); }
+
+    /* ═══════════ MAIN CONTENT ═══════════ */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 100px 24px 60px;
+    }
+
+    /* ═══════════ PAGE HEADER ═══════════ */
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 700;
+      color: var(--olive-900);
+      margin-bottom: 10px;
+    }
+    .page-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════ SEARCH ═══════════ */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      height: 56px;
+      padding: 0 20px 0 52px;
+      border: 1.5px solid var(--olive-300);
+      border-radius: 16px;
+      background: var(--input-bg);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 16px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus {
+      border-color: var(--olive-500);
+      box-shadow: 0 0 0 3px rgba(174, 183, 132, 0.25);
+    }
+
+    .search-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      padding-left: 4px;
+    }
+
+    /* ═══════════ CATEGORY SECTIONS ═══════════ */
+    .faq-category {
+      margin-bottom: 36px;
+    }
+    .faq-category.hidden {
+      display: none;
+    }
+    .category-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--olive-900);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--divider);
+    }
+
+    /* ═══════════ FAQ ITEMS ═══════════ */
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover {
+      box-shadow: 0 4px 28px rgba(65,67,27, 0.12);
+    }
+    .faq-item.hidden {
+      display: none;
+    }
+
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--olive-900);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::marker { display: none; content: ''; }
+
+    .faq-item summary:hover {
+      background: rgba(174, 183, 132, 0.08);
+    }
+
+    .faq-item summary .indicator {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(65,67,27, 0.06);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--olive-900);
+      transition: transform 0.3s ease, background 0.2s;
+    }
+    .faq-item[open] summary .indicator {
+      transform: rotate(45deg);
+      background: rgba(65,67,27, 0.12);
+    }
+
+    .faq-answer {
+      padding: 0 20px 20px;
+      font-size: 14px;
+      color: var(--olive-800);
+      line-height: 1.7;
+    }
+    .faq-answer p {
+      margin-bottom: 12px;
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer strong {
+      color: var(--olive-900);
+      font-weight: 700;
+    }
+    .faq-answer ol,
+    .faq-answer ul {
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+    .faq-answer li {
+      margin-bottom: 6px;
+    }
+    .faq-answer table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .faq-answer th {
+      text-align: left;
+      padding: 10px 12px;
+      background: rgba(65,67,27, 0.06);
+      border-bottom: 1.5px solid var(--divider);
+      font-weight: 700;
+      color: var(--olive-900);
+    }
+    .faq-answer td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--divider);
+      color: var(--olive-800);
+    }
+
+    /* ═══════════ NO RESULTS ═══════════ */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .no-results.visible {
+      display: block;
+    }
+    .no-results-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+    .no-results h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--olive-900);
+      margin-bottom: 8px;
+    }
+    .no-results p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════ SUPPORT CARD ═══════════ */
+    .support-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      box-shadow: var(--card-shadow);
+      padding: 32px;
+      text-align: center;
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+    .support-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--olive-900);
+      margin-bottom: 8px;
+    }
+    .support-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .support-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--olive-900);
+      color: var(--cream-100);
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .support-card a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(65,67,27, 0.15);
+    }
+
+    /* ═══════════ FOOTER ═══════════ */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 24px;
+    }
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--olive-900); }
+    footer .sep {
+      color: var(--divider);
+    }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .content { padding: 88px 16px 40px; }
+      .faq-item summary { padding: 16px; font-size: 15px; }
+      .faq-answer { padding: 0 16px 16px; }
+      .support-card { padding: 24px 20px; }
+      footer { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav>
+    <a href="index.html" class="nav-left">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="110" cy="100" r="90" fill="#1E1E18"/>
+        <path d="M90 182 Q78 208 56 216 Q82 202 98 186 Z" fill="#1E1E18"/>
+        <text x="110" y="100"
+          font-family="'Playfair Display', Georgia, serif"
+          font-size="74" font-weight="700"
+          fill="#F8F3E1"
+          text-anchor="middle"
+          dominant-baseline="central"
+          letter-spacing="-2">Che</text>
+        <circle cx="178" cy="168" r="20" fill="#AEB784"/>
+        <text x="170" y="174"
+          font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif"
+          font-size="14" font-weight="700"
+          fill="#1E1E18" text-anchor="middle">あ</text>
+        <text x="187" y="176"
+          font-family="'Playfair Display', Georgia, serif"
+          font-size="16" font-weight="700"
+          fill="#F8F3E1" text-anchor="middle">A</text>
+      </svg>
+      <span>CheEspanol</span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-link">Back to home</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <div class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Frequently Asked Questions</h1>
+      <p>Everything you need to know about learning Spanish with CheEspanol.</p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input
+        type="text"
+        class="search-input"
+        id="faq-search"
+        placeholder="Search questions..."
+        autocomplete="off"
+      />
+    </div>
+    <div class="search-count" id="search-count"></div>
+
+    <!-- ═══════════ GETTING STARTED ═══════════ -->
+    <section class="faq-category" data-category="getting-started">
+      <h2 class="category-title">Getting Started</h2>
+
+      <details class="faq-item" data-tags="about, info, academy, spanish">
+        <summary>
+          <span>What is CheEspanol?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>CheEspanol is a personalized 1-on-1 Spanish learning academy. You get live lessons with a dedicated teacher, a mobile app to track your progress, recorded lessons to review anytime, homework with teacher feedback, and a vocabulary flashcard system — all designed around your pace, goals, and interests.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="audience, level, beginner, advanced, age">
+        <summary>
+          <span>Who is CheEspanol for?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Anyone who wants to learn Spanish — regardless of age, background, or current level. Whether you're a complete beginner or looking to sharpen your conversation skills, we build a personalized learning roadmap just for you.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="register, account, login, sign-in, google, apple">
+        <summary>
+          <span>How do I sign up?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Download the app from the App Store or Google Play and sign in with your Google or Apple account. That's it — no forms, no passwords. You'll be on your dashboard in seconds.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="trial, free, first, lesson, assessment, test">
+        <summary>
+          <span>What happens in my free trial lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Your first lesson is free and designed to get to know you. Your teacher will learn about your goals, interests, and background, then run a series of exercises across different topics to map your actual Spanish level. By the end, you'll have a personalized level assessment, a recommended lesson pack, and a clear view of your learning roadmap. No commitment required.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="method, immersion, approach, how, learn">
+        <summary>
+          <span>What is the teaching method?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We use full immersion — every lesson is 100% in Spanish from day one, no matter your native language. Your teacher guides the conversation, but you do most of the talking. Lessons, homework, and vocabulary are all personalized to your profession, hobbies, and interests, so you're always practicing with content that matters to you.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ LESSONS ═══════════ -->
+    <section class="faq-category" data-category="lessons">
+      <h2 class="category-title">Lessons</h2>
+
+      <details class="faq-item" data-tags="duration, time, minutes, length">
+        <summary>
+          <span>How long are lessons?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Lessons last between 30 and 45 minutes. Quality matters more than clock time — your teacher adjusts the pace to keep the lesson effective and engaging.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="format, structure, what, expect">
+        <summary>
+          <span>What's the lesson format?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Every lesson follows a consistent structure:</p>
+          <ol>
+            <li><strong>Greeting &amp; small talk</strong> (~5 min) — warm up in Spanish</li>
+            <li><strong>Homework review</strong> (up to 10 min) — go over your submitted exercises</li>
+            <li><strong>Previous topic recap</strong> (5-10 min) — reinforce what you learned last time</li>
+            <li><strong>New content</strong> (~20 min) — learn and practice a new topic</li>
+            <li><strong>Homework &amp; goodbye</strong> (~5 min) — get your next assignment and a preview of the next lesson</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="language, immersion, english, spanish, native">
+        <summary>
+          <span>Are lessons in Spanish only?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Every lesson is conducted entirely in Spanish, regardless of your native language. This is intentional — full immersion is the fastest path to real fluency. Your teacher adapts their vocabulary and speed to your level, so you're always challenged but never lost.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="requirements, device, zoom, internet, setup">
+        <summary>
+          <span>What do I need for a lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>A device (phone, tablet, or computer) with Zoom installed and a stable internet connection. Your teacher will send you the video call link through the app once your lesson is booked.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="teacher, absence, cancel, unavailable, replacement">
+        <summary>
+          <span>What happens if my teacher can't make the lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>If your teacher is unable to attend a scheduled lesson, please contact us as soon as possible at support@cheespanol.com. We'll arrange another lesson for you at the earliest time that works for you. Your lesson credit is always protected.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ RECORDINGS ═══════════ -->
+    <section class="faq-category" data-category="recordings">
+      <h2 class="category-title">Recordings</h2>
+
+      <details class="faq-item" data-tags="recording, video, record, save">
+        <summary>
+          <span>Are lessons recorded?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Every lesson is automatically recorded and saved to your account. You can rewatch any past lesson whenever you want — it's like having a personal archive of your entire learning journey.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="recording, watch, find, replay, video">
+        <summary>
+          <span>Where can I watch my recordings?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Go to <strong>My Lessons</strong> in the app. Each past lesson shows its recording along with any attachments or notes from that session. Recordings are available permanently — they never expire.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ PRICING ═══════════ -->
+    <section class="faq-category" data-category="pricing">
+      <h2 class="category-title">Pricing</h2>
+
+      <details class="faq-item" data-tags="price, cost, money, rate, usd">
+        <summary>
+          <span>How much do lessons cost?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Lessons are purchased in packs. The per-lesson price depends on the pack size:</p>
+          <table>
+            <thead>
+              <tr><th>Pack</th><th>Lessons</th><th>Price</th><th>Per Lesson</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Starter</td><td>4</td><td>$100</td><td>$25</td></tr>
+              <tr><td>Standard</td><td>8</td><td>$184</td><td>$23</td></tr>
+              <tr><td>Intensive</td><td>12</td><td>$252</td><td>$21</td></tr>
+            </tbody>
+          </table>
+          <p>Larger packs offer a better per-lesson rate.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="pack, bundle, options, starter, standard, intensive">
+        <summary>
+          <span>What lesson packs are available?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We offer three packs:</p>
+          <ul>
+            <li><strong>Starter</strong> (4 lessons) — $100. Great for trying things out with no big commitment.</li>
+            <li><strong>Standard</strong> (8 lessons) — $184. The most popular choice for consistent weekly practice.</li>
+            <li><strong>Intensive</strong> (12 lessons) — $252. Best value per lesson, ideal if you want to progress quickly.</li>
+          </ul>
+          <p>When you finish a pack, you can buy another one anytime.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="expire, expiration, validity, credit, time-limit">
+        <summary>
+          <span>Do lesson credits expire?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>No. Your lesson credits never expire. Use them at your own pace — there's no rush.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="free, cost, subscription, access, app">
+        <summary>
+          <span>Is the platform free?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. The app is completely free to use — forever. You get full access to your dashboard, lesson recordings, flashcards, homework, progress tracking, and all platform features at no cost. You only pay when you purchase a lesson pack for live 1-on-1 lessons with your teacher.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ SCHEDULING ═══════════ -->
+    <section class="faq-category" data-category="scheduling">
+      <h2 class="category-title">Scheduling</h2>
+
+      <details class="faq-item" data-tags="book, schedule, reserve, calendar, appointment">
+        <summary>
+          <span>How do I book a lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Open the <strong>Calendar</strong> in the app. You'll see available slots for this week and next week (Monday through Saturday). Tap any open slot and your lesson is booked instantly. You'll see a quick confirmation with an option to undo within a few seconds.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="advance, booking, window, week, ahead">
+        <summary>
+          <span>How far in advance can I book?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>You can book lessons for the current week and the following week (Monday through Saturday). This gives you a full view of available slots without overwhelming you with too many options.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="today, same-day, last-minute, now, urgent">
+        <summary>
+          <span>Can I book a same-day lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>No. The earliest you can book is tomorrow. This gives your teacher time to prepare a personalized lesson for you, which is key to making each session count.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="timezone, time, zone, hours, clock, country">
+        <summary>
+          <span>What timezone are lessons shown in?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>All lesson times are automatically displayed in your local timezone. The app detects your timezone when you sign up, and you can change it anytime in <strong>Settings</strong>.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ CANCELLATION ═══════════ -->
+    <section class="faq-category" data-category="cancellation">
+      <h2 class="category-title">Cancellation</h2>
+
+      <details class="faq-item" data-tags="cancel, how, remove, booking">
+        <summary>
+          <span>How do I cancel a lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Open the <strong>Calendar</strong> in the app, tap your booked lesson, and cancel it. As long as you cancel before midnight the day before your lesson, your lesson credit is returned and the slot opens up for rebooking.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="cancel, policy, rules, deadline, midnight">
+        <summary>
+          <span>What's the cancellation policy?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <ul>
+            <li><strong>Cancel before midnight the day before your lesson</strong>: Free. Your lesson credit is returned.</li>
+            <li><strong>Cancel on the day of your lesson</strong>: Your lesson credit is consumed. No exceptions.</li>
+          </ul>
+          <p>The rule is simple — cancel by the end of the day before, and you keep your credit.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="reschedule, change, move, swap, different">
+        <summary>
+          <span>Can I reschedule a lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Rescheduling works as a cancel-and-rebook. Cancel your current lesson (the normal cancellation rules apply), then book a new slot from the calendar. There's no limit to how many times you can reschedule within a pack.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="miss, no-show, absent, forgot, skip">
+        <summary>
+          <span>What happens if I miss a lesson?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>If you don't show up and haven't canceled before midnight the day before, your lesson credit is consumed. Your teacher prepared and reserved that time for you, so we can't return the credit. We'll reach out to make sure everything's okay and help you rebook your next session.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ PAYMENTS ═══════════ -->
+    <section class="faq-category" data-category="payments">
+      <h2 class="category-title">Payments</h2>
+
+      <details class="faq-item" data-tags="payment, pay, credit-card, method, how-to-pay">
+        <summary>
+          <span>What payment methods are accepted?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We accept all major payment methods. The available options are shown at checkout and may vary depending on your region.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="refund, money-back, return, reimburse">
+        <summary>
+          <span>Can I get a refund?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Lesson credits are non-refundable. Since credits never expire and there's no subscription to cancel, you can always use your remaining credits whenever you're ready to continue.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="invoice, receipt, billing, history, payment-history">
+        <summary>
+          <span>Where can I see my invoices?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Go to the <strong>Billing</strong> section in the app. You'll find your pack purchase history and invoices there.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ REFERRALS ═══════════ -->
+    <section class="faq-category" data-category="referrals">
+      <h2 class="category-title">Referrals</h2>
+
+      <details class="faq-item" data-tags="referral, refer, friend, invite, share">
+        <summary>
+          <span>How does the referral program work?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Every student gets a personal referral code. Share it with a friend — when they sign up and buy their first lesson pack, you earn <strong>1 free lesson credit</strong>. There's no limit to how many friends you can refer.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="referral, share, code, send, link">
+        <summary>
+          <span>How do I share my referral code?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Go to the <strong>Free Lesson!</strong> section in the app menu. You'll see your referral code and a share button that lets you send it via any messaging app. You can also share the link directly: cheespanol.com/ref/YOUR-CODE.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="referral, code, when, apply, deadline">
+        <summary>
+          <span>When does my friend need to use the code?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Your friend can apply your referral code anytime before they buy their first lesson pack. Once they make their first purchase, it's too late to add a code. They can enter it during sign-up or later in their Settings.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="discount, promotion, deal, savings, offer">
+        <summary>
+          <span>Are there any discounts?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes, you can earn up to 10% off your next pack through two stackable rewards:</p>
+          <ul>
+            <li><strong>Pack Loyalty (5% off)</strong>: Finish a pack, and your next purchase gets 5% off.</li>
+            <li><strong>Referral Reward (5% off)</strong>: When a friend you referred buys a pack, you also get 5% off your next purchase.</li>
+          </ul>
+          <p>These are the only discounts we offer — no coupon codes, no seasonal sales. Just honest rewards for commitment and word-of-mouth.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ HOMEWORK ═══════════ -->
+    <section class="faq-category" data-category="homework">
+      <h2 class="category-title">Homework</h2>
+
+      <details class="faq-item" data-tags="homework, exercise, assignment, practice">
+        <summary>
+          <span>How does homework work?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>After each lesson, you'll receive a short assignment on the platform. You can submit your answers as text, audio recordings, or file uploads. Your teacher reviews your work and provides feedback, which you'll discuss together at the start of your next lesson.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="homework, when, available, timing, after">
+        <summary>
+          <span>When is homework available?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Your homework is available immediately after your lesson ends. You can start right away while the lesson is fresh, or save it for later — it's up to you.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="homework, duration, time, minutes, long">
+        <summary>
+          <span>How long does homework take?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>About 10 minutes. Homework is designed to reinforce what you learned without being overwhelming. Some exercises are auto-graded (multiple choice, fill-in-the-blank), while others are reviewed personally by your teacher.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="homework, feedback, review, correction, grade">
+        <summary>
+          <span>How do I get feedback on my homework?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Your teacher reviews your submissions and leaves feedback on the platform. Auto-graded exercises (multiple choice, fill-in-the-blank) give you results instantly. For everything else, your teacher will go over the corrections with you at the start of your next lesson.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ VOCABULARY ═══════════ -->
+    <section class="faq-category" data-category="vocabulary">
+      <h2 class="category-title">Vocabulary</h2>
+
+      <details class="faq-item" data-tags="flashcard, vocabulary, words, cards, 625">
+        <summary>
+          <span>What is the flashcard system?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>The app includes a built-in vocabulary trainer with the 625 most commonly used Spanish words, organized by category (animals, food, body, colors, verbs, and more). Each flashcard shows an image and the Spanish word — no translations. This trains you to think in Spanish from the start.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="unlock, vocabulary, flashcard, progress, locked">
+        <summary>
+          <span>How do I unlock new vocabulary?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Vocabulary categories start locked. Each lesson you complete unlocks one or more related categories. For example, a lesson about food will unlock the food vocabulary deck. This keeps your flashcard practice connected to what you're learning in class.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="spaced, repetition, review, schedule, memory">
+        <summary>
+          <span>How does spaced repetition work?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Spaced repetition is a proven memory technique that shows you words just before you're about to forget them. The app automatically schedules your reviews — you just open the <strong>Top 625 Words</strong> section and practice whatever's due. Words you find easy appear less often; words you struggle with come back more frequently until they stick.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ PROGRESS ═══════════ -->
+    <section class="faq-category" data-category="progress">
+      <h2 class="category-title">Progress</h2>
+
+      <details class="faq-item" data-tags="progress, track, dashboard, stats, level">
+        <summary>
+          <span>How is my progress tracked?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Your dashboard shows everything at a glance: completed topics, vocabulary learned, total lesson hours, your current CEFR level, and what's coming next. Your teacher also curates a view of your strengths and areas for improvement, so you always know where you stand.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="streak, daily, consecutive, habit">
+        <summary>
+          <span>What are streaks?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>A streak counts the consecutive days you've engaged with the app — reviewing flashcards, completing homework, or attending a lesson. It's a simple way to build a daily habit. Your streak is visible on your dashboard.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="badge, achievement, milestone, reward, gamification">
+        <summary>
+          <span>What are achievement badges?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Badges are milestones you earn as you progress — things like completing your first lesson, finishing a pack, reaching a new CEFR level, or maintaining a long streak. They're visible in the <strong>My Progress</strong> section and serve as a record of how far you've come.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ═══════════ ACCOUNT ═══════════ -->
+    <section class="faq-category" data-category="account">
+      <h2 class="category-title">Account</h2>
+
+      <details class="faq-item" data-tags="timezone, change, settings, time, zone">
+        <summary>
+          <span>How do I change my timezone?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Go to <strong>Settings</strong> in the app and update your timezone. This affects how lesson times are displayed throughout the app. Your timezone is auto-detected when you first sign up, but you can change it anytime (for example, if you travel).</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="preferences, personalization, customize, hobbies, interests">
+        <summary>
+          <span>Can I customize my learning preferences?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. In <strong>Settings > Content Personalization</strong>, you can update your hobbies, profession, learning goals, preferred lesson pace, vocabulary focus areas, and more. Your teacher uses this information to tailor lesson examples and homework to topics that actually interest you.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="delete, account, remove, close, gdpr">
+        <summary>
+          <span>How do I delete my account?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Go to <strong>Settings</strong> and select <strong>Delete Account</strong>. Account deletion requires a brief review to check your billing status. Once confirmed, your account and personal data will be removed. If you have unused lesson credits, make sure to use them first — they cannot be refunded.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-tags="support, help, contact, email, problem">
+        <summary>
+          <span>How do I contact support?</span>
+          <span class="indicator">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Email us at <strong>support@cheespanol.com</strong>. You can also find this at the bottom of the Help section in the app. We'll get back to you as soon as possible.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- No Results State -->
+    <div class="no-results" id="no-results">
+      <div class="no-results-icon">?</div>
+      <h3>No matching questions</h3>
+      <p>Try a different search term, or browse all categories above.</p>
+    </div>
+
+    <!-- Support Card -->
+    <div class="support-card" id="support-card">
+      <h3>Still have questions?</h3>
+      <p>Can't find what you're looking for? Our team is here to help.</p>
+      <a href="mailto:support@cheespanol.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Contact support
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <span>&copy; 2026 CheEspanol</span>
+    <span class="sep">|</span>
+    <a href="index.html">Back to home</a>
+    <span class="sep">|</span>
+    <a href="mailto:support@cheespanol.com">support@cheespanol.com</a>
+  </footer>
+
+  <!-- ═══════════ SEARCH JS ═══════════ -->
+  <script>
+    (function () {
+      const searchInput = document.getElementById('faq-search');
+      const searchCount = document.getElementById('search-count');
+      const noResults = document.getElementById('no-results');
+      const supportCard = document.getElementById('support-card');
+      const allItems = Array.from(document.querySelectorAll('.faq-item'));
+      const allCategories = Array.from(document.querySelectorAll('.faq-category'));
+      const totalCount = allItems.length;
+
+      // Set initial count
+      searchCount.textContent = 'Showing ' + totalCount + ' of ' + totalCount + ' questions';
+
+      searchInput.addEventListener('input', function () {
+        const query = this.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        allItems.forEach(function (item) {
+          if (!query) {
+            item.classList.remove('hidden');
+            visibleCount++;
+            return;
+          }
+
+          const questionText = item.querySelector('summary span').textContent.toLowerCase();
+          const answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+          const tags = (item.getAttribute('data-tags') || '').toLowerCase();
+          const searchable = questionText + ' ' + answerText + ' ' + tags;
+
+          if (searchable.indexOf(query) !== -1) {
+            item.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+
+        // Show/hide category sections based on whether they have visible items
+        allCategories.forEach(function (cat) {
+          const visibleItems = cat.querySelectorAll('.faq-item:not(.hidden)');
+          if (visibleItems.length === 0) {
+            cat.classList.add('hidden');
+          } else {
+            cat.classList.remove('hidden');
+          }
+        });
+
+        // Update count
+        searchCount.textContent = 'Showing ' + visibleCount + ' of ' + totalCount + ' questions';
+
+        // Show/hide no results message
+        if (visibleCount === 0) {
+          noResults.classList.add('visible');
+          supportCard.style.display = 'none';
+        } else {
+          noResults.classList.remove('visible');
+          supportCard.style.display = '';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
